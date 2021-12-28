@@ -8,7 +8,7 @@
     <title>Asistencia  - UGEL</title>
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-
+    <script type="module" src="js/credentials.js"></script>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -101,7 +101,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         
-        <a class="nav-link text-white" aria-current="page">
+        <a class="nav-link text-white" href="admin.html" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Inicio
         </a>
@@ -124,13 +124,6 @@
           Asignación
         </a>
       </li>
-      <!-- 
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
-        </a>
-      </li> -->
     </ul>
     <hr>
     <div class="dropdown">
@@ -152,43 +145,42 @@
       <p class="fw-bold fs-1 text-uppercase text-center">Registro Personal</p>
     </div>
     <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1">DNI</span>
-      <input type="text" class="form-control" placeholder="DNI" aria-label="Username" aria-describedby="basic-addon1">
+      <span class="input-group-text" >DNI</span>
+      <input type="text" class="form-control" id="dni"placeholder="DNI" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon2">Nombres</span>
-      <input type="text" class="form-control" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1">
+      <span class="input-group-text" >Nombres</span>
+      <input type="text" class="form-control" id="nombres" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon3">Apellidos</span>
-      <input type="text" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
+      <span class="input-group-text" >Apellidos</span>
+      <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">Cargo</label>
-      <select class="form-select" id="inputGroupSelect01">
-        <option selected>Seleccionar</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" id="cargo">
+        <option value="Director" selected>Director</option>
+        <option value="Otro">Otro</option>
       </select>
     </div>
+    
     <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">Condición Laboral</label>
-      <select class="form-select" id="inputGroupSelect02">
-        <option selected>Seleccionar</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" id="condicion">
+        <option value="Nombrado" selected>Nombrado</option>
+        <option value="Destacado">Destacado</option>
+        <option value="Encargado">Encargado</option>
+        <option value="Contratado">Contratado</option>
       </select>
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon4">Jornada laboral</span>
-      <input type="text" class="form-control" placeholder="Jornada laboral" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" id="jornada" placeholder="Jornada laboral" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-primary" id="save">Guardar</button>
         </div>
       </div>
     </div>
@@ -206,19 +198,8 @@
             <th>Acción</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>dni</td>
-            <td>nombre</td>
-            <td>Apellidos</td>
-            <td>cargo</td>
-            <td>condicion laboral</td>
-            <td>jornada laboral</td>
-            <td>
-              <a href="#" class="link-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Actualizar</a>
-              <a href="#" class="link-danger">Eliminar</a>
-            </td>
-          </tr>
+        <tbody id="tab">
+          
         </tbody>
       </table>
       <p>
@@ -238,50 +219,64 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <input type="text"  id="idU" hidden>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon5">DNI</span>
-              <input type="text" class="form-control" placeholder="DNI" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" id="dniU" class="form-control" placeholder="DNI" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon6">Nombres</span>
-              <input type="text" class="form-control" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" id="nombresU" class="form-control" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon7">Apellidos</span>
-              <input type="text" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" id="apellidosU" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupSelect01">Cargo</label>
-              <select class="form-select" id="inputGroupSelect03">
-                <option selected>Seleccionar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select class="form-select" id="cargoU">
+                <option value="Director" selected>Director</option>
+                <option value="Otro">Otro</option>
               </select>
             </div>
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupSelect01">Condición Laboral</label>
-              <select class="form-select" id="inputGroupSelect04">
-                <option selected>Seleccionar</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select class="form-select" id="condicionU">
+                <option value="Nombrado" selected>Nombrado</option>
+                <option value="Destacado">Destacado</option>
+                <option value="Encargado">Encargado</option>
+                <option value="Contratado">Contratado</option>
               </select>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon8">Jornada laboral</span>
-              <input type="text" class="form-control" placeholder="Jornada laboral" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" id="jornadaU" class="form-control">
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Actualizar</button>
+            <button type="button" class="btn btn-primary" id="update">Actualizar</button>
           </div>
         </div>
       </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body" id="error1">
+          </div>
+          <p class="text-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
+          </p>
+        </div>
+      </div>
+    </div>
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/sidebars.js"></script>  
+    <script src="js/crud.js"></script>
+    <script type="module" src="js/personal.js"></script>
+    
   </body>
 </html>
