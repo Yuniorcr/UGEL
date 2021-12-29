@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             
             `
         } else {
-            location.href("index.html")
+            location.href = "index.html"
         }
     });
 })

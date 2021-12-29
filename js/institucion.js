@@ -73,7 +73,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       if (user) {
           console.log("hi...");
       } else {
-          location.href("index.html")
+        location.href = "index.html";
       }
   });
     
