@@ -28,6 +28,8 @@
     
     <!-- Custom styles for this template -->
     <link href="./css/sidebars.css" rel="stylesheet">
+    <script type="module" src="js/credentials.js"></script>
+    <script src="js/crud.js"></script> 
   </head>
   <body>
     
@@ -101,7 +103,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         
-        <a class="nav-link text-white" aria-current="page">
+        <a href="admin.html" class="nav-link text-white" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Inicio
         </a>
@@ -124,13 +126,6 @@
           Asignación
         </a>
       </li>
-      <!-- 
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
-        </a>
-      </li> -->
     </ul>
     <hr>
     <div class="dropdown">
@@ -153,18 +148,10 @@
     </div>
     <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">Cargo</label>
-      <select class="form-select" id="inputGroupSelect01">
-        <option selected>Seleccionar</option>
-        <option value="1">Director</option>
-        <option value="2">Otro</option>
+      <select class="form-select"  id="buscar">
+        <option value="Director">Director</option>
+        <option value="Otro">Otro</option>
       </select>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <button type="button" class="btn btn-primary">Filtrar</button>
-        </div>
-      </div>
     </div>
     
     <div class="table-responsive">
@@ -179,17 +166,7 @@
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>DNI</td>
-            <td>Nombre</td>
-            <td>Apellidos</td>
-            <td>Cargo</td>
-            <td>
-              <a href="#" class="link-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Actualizar</a>
-            </td>
-            <td>Asignado/no asignado</td>
-          </tr>
+        <tbody id="tab">
         </tbody>
       </table>
       <p>
@@ -204,6 +181,7 @@
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
+          <input type="text" id="id" hidden>
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Asignar</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -211,48 +189,52 @@
           <div class="modal-body">
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">DNI</span>
-              <input type="text" class="form-control" placeholder="DNI" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
+              <input type="text" class="form-control" id="dniA" placeholder="DNI" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon8">Nombre</span>
-              <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
+              <input type="text" class="form-control" id="nombreA" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon9">Apellidos</span>
-              <input type="text" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
+              <input type="text" class="form-control" id="apellidoA" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon10">Cargo</span>
-              <input type="text" class="form-control" placeholder="Cargo" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
+              <input type="text" class="form-control" id="cargoA" placeholder="Cargo" aria-label="Username" aria-describedby="basic-addon1" disabled readonly>
             </div>
 
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupSelect01">Institucion Educativa</label>
-              <select class="form-select" id="inputGroupSelect02">
-                <option selected>Seleccionar</option>
-                <option value="1">ie agropecuario</option>
-                <option value="2">ie cristo</option>
+              <select class="form-select" id="institucionA">
+                <option value="IEAgropecuario" selected>IE Agropecuario</option>
+                <option value="IECristoRey">IE Cristo Rey</option>
+                <option value="IEJuanEspinoza">IEJuanEspinoza</option>
               </select>
             </div>
 
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon11">Hora entrada</span>
-              <input type="time" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="time" class="form-control" id="horaeA" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon12">Hora Salida</span>
-              <input type="time" class="form-control" placeholder="Cargo" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="time" class="form-control" id="horasA" placeholder="Cargo" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div id="alertita">
+
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Asignar</button>
+            <button type="button" class="btn btn-primary" id="Asignar">Asignar</button>
           </div>
         </div>
       </div>
     </div>
 
     <script src="./js/bootstrap.bundle.min.js"></script>
-    <script src="./js/sidebars.js"></script>  
+    <script src="./js/sidebars.js"></script> 
+    <script type="module" src="js/asignacion.js"></script>
   </body>
 </html>

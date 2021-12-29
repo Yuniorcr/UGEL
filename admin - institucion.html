@@ -28,6 +28,7 @@
     
     <!-- Custom styles for this template -->
     <link href="./css/sidebars.css" rel="stylesheet">
+    <script type="module" src="js/credentials.js"></script>
   </head>
   <body>
     
@@ -101,7 +102,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         
-        <a class="nav-link text-white" aria-current="page">
+        <a href="admin.html" class="nav-link text-white" aria-current="page">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Inicio
         </a>
@@ -153,28 +154,28 @@
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">Nombre</span>
-      <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" id="nombre" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon2">Nivel educativo</span>
-      <input type="text" class="form-control" placeholder="Nivel educativo" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" id="nivel" placeholder="Nivel educativo" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon3">Codigo Modular</span>
-      <input type="text" class="form-control" placeholder="Codigo Modular" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control"  id="codigo" placeholder="Codigo Modular" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon4">Dirección</span>
-      <input type="text" class="form-control" placeholder="Dirección" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" id="direccion" placeholder="Dirección" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon7">Distrito</span>
-      <input type="text" class="form-control" placeholder="Distrito" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" id="distrito" placeholder="Distrito" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-primary" id="save">Guardar</button>
         </div>
       </div>
     </div>
@@ -191,18 +192,7 @@
             <th>Acción</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Nombre</td>
-            <td>Nivel</td>
-            <td>Codigo Modular</td>
-            <td>Direccion</td>
-            <td>Distrito</td>
-            <td>
-              <a href="#" class="link-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Actualizar</a>
-              <a href="#" class="link-danger">Eliminar</a>
-            </td>
-          </tr>
+        <tbody id="tab">
         </tbody>
       </table>
       <p>
@@ -222,36 +212,55 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <input type="text" id="idU" hidden>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon8">Nombre</span>
-              <input type="text" class="form-control" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control"id="nombreU" placeholder="Nombre" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon9">Nivel educativo</span>
-              <input type="text" class="form-control" placeholder="Nivel educativo" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" id="nivelU" placeholder="Nivel educativo" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon10">Codigo Modular</span>
-              <input type="text" class="form-control" placeholder="Codigo Modular" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control"id="codigoU" placeholder="Codigo Modular" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon11">Dirección</span>
-              <input type="text" class="form-control" placeholder="Dirección" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" id="direccionU" placeholder="Dirección" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon12">Distrito</span>
-              <input type="text" class="form-control" placeholder="Distrito" aria-label="Username" aria-describedby="basic-addon1">
+              <input type="text" class="form-control" id="distritoU" placeholder="Distrito" aria-label="Username" aria-describedby="basic-addon1">
             </div>
+          </div>
+          <div id="alertita">
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Actualizar</button>
+            <button type="button" class="btn btn-primary" id="update" >Actualizar</button>
           </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body" id="error1">
+          </div>
+          <p class="text-center">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+          </p>
         </div>
       </div>
     </div>
 
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/sidebars.js"></script>  
+    <script src="js/crud.js"></script>
+    <script type="module" src="./js/institucion.js"></script>
   </body>
 </html>
