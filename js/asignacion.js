@@ -1,4 +1,6 @@
 import { getFirestore, collection, addDoc, onSnapshot, query, doc, deleteDoc, updateDoc,where} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+const auth = getAuth();
 const db = getFirestore();
 
 document.getElementById("Asignar").addEventListener("click", Asignar);
@@ -60,6 +62,13 @@ window.addEventListener("DOMContentLoaded", async () => {
     buscar.addEventListener('change', (e)=>{
         ReadAsignacion(buscar.value)
     })
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            console.log("hi...");
+        } else {
+            location.href("index.html")
+        }
+    });
 })
 
 async function Asignar(){

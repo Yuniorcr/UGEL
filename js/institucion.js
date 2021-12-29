@@ -1,4 +1,6 @@
 import { getFirestore, collection, addDoc, onSnapshot, query, doc, deleteDoc, updateDoc} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, signOut, updateProfile,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+const auth = getAuth();
 const db = getFirestore();
 const DeleteInstitution = async (id) => {
   await deleteDoc(doc(db, "Institucion",id));
@@ -66,6 +68,15 @@ window.addEventListener("DOMContentLoaded", async () => {
     })
       });
     });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+          console.log("hi...");
+      } else {
+          location.href("index.html")
+      }
+  });
+    
   })
   async function UpdateInstitution(){
     let id = document.getElementById("idU").value;
@@ -106,3 +117,11 @@ window.addEventListener("DOMContentLoaded", async () => {
       `
     });
   }
+
+document.getElementById("cerrar").addEventListener("click", async () =>{
+  signOut(auth).then(() => {
+    location.href ="index.html";
+  }).catch((error) => {
+    console.log(error);
+  });
+})

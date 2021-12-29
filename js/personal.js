@@ -1,4 +1,6 @@
 import { getFirestore, collection, addDoc, onSnapshot, query, doc, deleteDoc, updateDoc} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, signOut,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+const auth = getAuth();
 const db = getFirestore();
 const DeletePereson = async (id) => {
   await deleteDoc(doc(db, "Personal",id));
@@ -65,7 +67,16 @@ window.addEventListener("DOMContentLoaded", async () => {
           DeletePereson(e.target.id)
         })
   })
+
     });
+  });
+
+  onAuthStateChanged(auth, (user) => {
+      if (user) {
+          console.log("hi...");
+      } else {
+          location.href("index.html")
+      }
   });
 })
 
