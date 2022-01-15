@@ -14,7 +14,12 @@ main {
   height: -webkit-fill-available;
   max-height: 100vh;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: scroll;
+}
+
+.talla{
+  height: 100vw;
+  max-height: auto;
 }
 
 .b-example-divider {
