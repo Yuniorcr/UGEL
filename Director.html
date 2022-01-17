@@ -93,65 +93,75 @@
 <main>
 
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark talla" style="width: 200px;">
-    <ul class="nav nav-pills sticky-top flex-column mb-auto">
-      <a href="admin.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <ul class="navbar-nav nav nav-pills sticky-top flex-column mb-auto ">
+      <a href="Director.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <svg class="bi me-2" width="40" height="32"><use xlink:href="#cpu-fill"/></svg>
         <span class="fs-5">ASISTENCIA - UGEL</span>
       </a>
       <hr>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page">
+        <a class="nav-link text-white active" aria-current="page" href="Director.html">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Inicio
         </a>
       </li>
       <li>
-        <a href="admin - personal.html" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#tools"/></svg>
-          Personal
+        <a href="Director-asistencia.html" class="nav-link text-white ">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          Asistencia
         </a>
       </li>
       <li>
-        <a href="admin - institucion.html" class="nav-link text-white">
+        <a href="#" class="nav-link text-white">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#tools"/></svg>
-          Institución
+          Reporte
         </a>
       </li>
       <li>
-        <a href="admin - asignacion.html" class="nav-link text-white">
+        <a href="#" class="nav-link text-white">
           <svg class="bi me-2" width="16" height="16"><use xlink:href="#tools"/></svg>
-          Asignación
+          --
         </a>
       </li>
+      <!-- 
+      <li>
+        <a href="#" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+          Customers
+        </a>
+      </li> -->
     </ul>
-    <hr>
+    <hr class="m-5">
     <div class="dropdown fixed-bottom p-4">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong>Opciones</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="admin.html">Perfil</a></li>
+        <li><a class="dropdown-item" href="Director.html">Perfil</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" onclick="sigOut()" href="#">Cerrar Sesión</a></li>
       </ul>
     </div>
   </div>
 
+
   <div class="b-example-divider"></div>
   <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 text-center">
     <div class="mt-4">
-      <p class="fw-bold fs-1 text-uppercase text-center">Tus datos personales</p>
+      <p class="fw-bold fs-1 text-uppercase text-center">Asistencia</p>
     </div>
     
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
           <tr>
-            <th>Datos</th>
+            <th>Id</th>
+            <th>Institución</th>
+            <th>Director</th>
           </tr>
         </thead>
-        <tbody id="datosInfo">
+        <tbody>
           
         </tbody>
       </table>
@@ -161,11 +171,62 @@
       </p>
     </div>
   </div>
+
 </main>
 
+      <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Actualizar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon5">DNI</span>
+              <input type="text" class="form-control" placeholder="DNI" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon6">Nombres</span>
+              <input type="text" class="form-control" placeholder="Nombres" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon7">Apellidos</span>
+              <input type="text" class="form-control" placeholder="Apellidos" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="inputGroupSelect01">Cargo</label>
+              <select class="form-select" id="inputGroupSelect03">
+                <option selected>Seleccionar</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="inputGroupSelect01">Condición Laboral</label>
+              <select class="form-select" id="inputGroupSelect04">
+                <option selected>Seleccionar</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon8">Jornada laboral</span>
+              <input type="text" class="form-control" placeholder="Jornada laboral" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Actualizar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="./js/bootstrap.bundle.min.js"></script>
-    <script src="./js/sidebars.js"></script>
-    <script type="module" src="js/credentials.js"></script>
-    <script type="module" src="js/admin.js"></script>
+    <script src="./js/sidebars.js"></script>  
   </body>
 </html>
