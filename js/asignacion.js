@@ -35,7 +35,7 @@ const ReadAsignacion = async (cargo) => {
 window.addEventListener("DOMContentLoaded", async () => {
     var tab = document.getElementById("tab");
     var asignacion;
-    const q = query(collection(db, "Personal"));
+    const q = query(collection(db, "Personal"), where("Cargo", "==", "Director"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         tab.innerHTML = ''
         querySnapshot.forEach((doc) => {

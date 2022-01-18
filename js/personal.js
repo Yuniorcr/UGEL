@@ -5,7 +5,17 @@ const db = getFirestore();
 const DeletePereson = async (id) => {
   await deleteDoc(doc(db, "Personal",id));
 }
-
+const disabled = async () => {
+  let cargito = document.getElementById("cargo").value;
+  if (cargito == "Director") {
+    document.getElementById("Usuario22").removeAttribute("disabled");
+    document.getElementById("contraseña22").removeAttribute("disabled");
+  }else if (cargito == "Otro") {
+    document.getElementById("Usuario22").setAttribute("disabled", "");
+    document.getElementById("contraseña22").setAttribute("disabled", "");
+  }
+}
+document.getElementById("cargo").addEventListener("change", disabled);
 document.getElementById("save").addEventListener("click", AddPerson);
 document.getElementById("update").addEventListener("click", updatePerson);
 async function AddPerson(){
