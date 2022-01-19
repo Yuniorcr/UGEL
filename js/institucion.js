@@ -42,9 +42,21 @@ async function AddInstitucion(){
 
 window.addEventListener("DOMContentLoaded", async () => {
     var tab = document.getElementById("tab");
+    var spinner = document.getElementById("Spinner");
+  spinner.innerHTML = `<div class="spinner-border text-info" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`
     const q = query(collection(db, "Institucion"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      tab.innerHTML = "";
+      spinner.innerHTML = '';
+      tab.innerHTML = `<tr>
+      <th>Nombre</th>
+      <th>Nivel</th>
+      <th>Codigo Modular</th>
+      <th>Direccion</th>
+      <th>Distrito</th>
+      <th>Acción</th>
+    </tr>`;
       querySnapshot.forEach((doc) => {
         tab.innerHTML += 
         `

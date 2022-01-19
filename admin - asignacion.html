@@ -147,25 +147,33 @@
     </div>
     <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">Cargo</label>
-      <select class="form-select"  id="buscar">
-        <option value="Director">Director</option>
-        <option value="Otro">Otro</option>
+      <select class="form-select" id="buscar">
+        <option value="Director" selected>Director</option>
+        <option value="SubDirector">Sub Director</option>
+        <option value="CoordinadorPedagógico">Coordinador Pedagógico</option>
+        <option value="Profesor">Profesor</option>
+        <option value="AuxiliarEducativo">Auxiliar Educativo</option>
+        <option value="PersonaldeServicio">Personal de Servicio</option>
+        <option value="Oficinista">Oficinista</option>
+        <option value="Secretaria(o)">Secretaria(o)</option>
+        <option value="Vigilante">Vigilante</option>
+        <option value="CoordinadorAdministrativo">Coordinador Administrativo</option>
+        <option value="CIST">CIST</option>
+        <option value="Psicólogo">Psicólogo</option>
+        <option value="ApoyoEducativo">Apoyo Educativo</option>
+        <option value="PersonaldeMantenimiento">Personal de Mantenimiento</option>        
       </select>
     </div>
     
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
-          <tr>
-            <th>DNI</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Cargo</th>
-            <th>Asignar</th>
-            <th>Status</th>
-          </tr>
+          
         </thead>
         <tbody id="tab">
+          <div class="d-flex justify-content-center" id="Spinner">
+            
+          </div>
         </tbody>
       </table>
       <p>

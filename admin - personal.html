@@ -91,7 +91,7 @@
 </svg>
 
 <main>
-
+  
   <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark talla" style="width: 200px;">
     
     <ul class="nav nav-pills sticky-top flex-column mb-auto">
@@ -160,16 +160,28 @@
       <label class="input-group-text" for="inputGroupSelect01">Cargo</label>
       <select class="form-select" id="cargo">
         <option value="Director" selected>Director</option>
-        <option value="Otro">Otro</option>
+        <option value="SubDirector">Sub Director</option>
+        <option value="CoordinadorPedagógico">Coordinador Pedagógico</option>
+        <option value="Profesor">Profesor</option>
+        <option value="AuxiliarEducativo">Auxiliar Educativo</option>
+        <option value="PersonaldeServicio">Personal de Servicio</option>
+        <option value="Oficinista">Oficinista</option>
+        <option value="Secretaria(o)">Secretaria(o)</option>
+        <option value="Vigilante">Vigilante</option>
+        <option value="CoordinadorAdministrativo">Coordinador Administrativo</option>
+        <option value="CIST">CIST</option>
+        <option value="Psicólogo">Psicólogo</option>
+        <option value="ApoyoEducativo">Apoyo Educativo</option>
+        <option value="PersonaldeMantenimiento">Personal de Mantenimiento</option>        
       </select>
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" >Usuario</span>
-      <input type="text" class="form-control" id="Usuario22" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="email" class="form-control" id="Usuario22" placeholder="email" aria-label="email" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
       <span class="input-group-text" >Contraseña</span>
-      <input type="password" class="form-control" id="contraseña22" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
+      <input type="password" class="form-control" id="contraseña22" placeholder="Contraseña no se admiten espacios en blanco( )" aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="input-group mb-3">
       <label class="input-group-text" for="inputGroupSelect01">Condición Laboral</label>
@@ -178,6 +190,7 @@
         <option value="Destacado">Destacado</option>
         <option value="Encargado">Encargado</option>
         <option value="Contratado">Contratado</option>
+        <option value="CAS">CAS</option>
       </select>
     </div>
     <div class="input-group mb-3">
@@ -187,33 +200,26 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-primary" id="save">Guardar</button>
+          <button type="button" class="btn btn-primary" id="save">Guardar</button><br><br>
         </div>
       </div>
     </div>
-    
     <div class="table-responsive">
       <table class="table table-striped table-sm">
         <thead>
-          <tr>
-            <th>DNI</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Cargo</th>
-            <th>Condicion Laboral</th>
-            <th>Jornada Laboral</th>
-            <th>Acción</th>
-          </tr>
+          
         </thead>
         <tbody id="tab">
-          
+          <div class="d-flex justify-content-center" id="Spinner">
+            
+          </div>
         </tbody>
       </table>
-      <p>
-        Sistema Asistencia de personal de la UGEL Andahuaylas
-        V.1
-      </p>
     </div>
+    <p>
+      Sistema Asistencia de personal de la UGEL Andahuaylas
+      V.1
+    </p>
   </div>
 </main>
 
