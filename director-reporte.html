@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Director</title>
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./css/dashboard.css" rel="stylesheet">
+      <!-- Icons Font Awesome-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://kit.fontawesome.com/9a4a4d3d5a.js" crossorigin="anonymous"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    
+  </head>
+  <body>
+    
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="director-ini.html"><i class="fas fa-hands-helping"></i> UGEL Andahuaylas</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link text-white" href="#"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</a>
+    </li>
+  </ul>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-white" aria-current="page" href="director-ini.html">
+              <i class="fas fa-home"></i>
+              Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="director-asis.html">
+              <i class="fas fa-clipboard-list"></i>
+              Asistencia
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white active  bg-info" href="director-reporte.html">
+              <i class="fas fa-paste"></i>
+              Reporte
+            </a>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">
+              <span data-feather="users"></span>
+              Customers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">
+              <span data-feather="bar-chart-2"></span>
+              Reports
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">
+              <span data-feather="layers"></span>
+              Integrations
+            </a>
+          </li>
+          -->
+        </ul>
+
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="mt-4">
+        <p class="fw-bold fs-1 text-uppercase text-center">Reporte</p>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-check"> </i>Seleccionar Mes y Año </span>
+        <input type="month" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="table-responsive text-center">
+        <table class="table table-bordered border-success table-striped table-sm">
+          <thead>
+            <tr>
+              <th rowspan="2">DNI</th>
+              <th rowspan="2">Apellidos y Nombres</th>
+              <th rowspan="2">Cargo</th>
+              <th rowspan="2">Condicion Laboral</th>
+              <th rowspan="2">Jornada laboral</th>
+              <th>Inasistencia</th>
+              <th colspan="2">Tardanza</th>
+              <th colspan="2">Permisos SG</th>
+              <th>Huelga</th>
+            </tr>
+            <tr>
+              <th>Dias</th>
+              <th>Horas</th>
+              <th>Minutos</th>
+              <th>Horas</th>
+              <th>Minutos</th>
+              <th>Dias</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>dni</td>
+              <td>personal</td>
+              <td>cargo</td>
+              <td>Condicion laboral</td>
+              <td>Jornada laboral</td>
+              <td>dias</td>
+              <td>horas</td>
+              <td>Minutos</td>
+              <td>horas</td>
+              <td>Minutos</td>
+              <td>Dias</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Sistema Asistencia de personal de la UGEL Andahuaylas
+          V.1
+        </p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Marcar Asistencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon13">Seleccionar</span>
+          <select class="form-select" id="inputGroupSelect01">
+            <option selected>Seleccionar</option>
+            <option value="A">Dia laborado</option>
+            <option value="I">Inasistencia Injustificada</option>
+            <option value="J">Inasistencia Justificada</option>
+            <option value="L">Licencia sin goce de Remuneracion</option>
+            <option value="P">Permiso sin goce de Remuneracion</option>
+            <option value="T">Tardanza</option>
+            <option value="H">Huelga o paro</option>
+            <option value="F">Feriado</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon6">Hora Ingreso</span>
+          <input type="time" id="Hingreso" class="form-control" placeholder="Hora Ingreso" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon7">Hora Salida</span>
+          <input type="time" id="Hsalida" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon8">Nombres</span>
+          <input type="text" id="Nonmbres" class="form-control">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon10">Apellidos</span>
+          <input type="text" id="Apellidos" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon11">Cargo</span>
+          <input type="text" id="Cargo" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times-circle"></i> Cerrar</button>
+        <button type="button" class="btn btn-primary" ><i class="fas fa-user-check"></i> Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/dashboard.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+  </body>
+</html>
