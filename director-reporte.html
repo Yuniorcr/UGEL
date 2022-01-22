@@ -59,13 +59,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-white bg-info" href="director-asis.html">
+            <a class="nav-link text-white" href="director-asis.html">
               <i class="fas fa-clipboard-list"></i>
               Asistencia
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="director-reporte.html">
+            <a class="nav-link text-white active  bg-info" href="director-reporte.html">
               <i class="fas fa-paste"></i>
               Reporte
             </a>
@@ -97,34 +97,48 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="mt-4">
-        <p class="fw-bold fs-1 text-uppercase text-center">Asistencia</p>
+        <p class="fw-bold fs-1 text-uppercase text-center">Reporte</p>
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-check"></i></span>
-        <input type="date" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        <span class="input-group-text" id="basic-addon1"><i class="fas fa-calendar-check"> </i>Seleccionar Mes y Año </span>
+        <input type="month" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
       </div>
       <div class="table-responsive text-center">
-        <table class="table table-striped table-sm">
+        <table class="table table-bordered border-success table-striped table-sm">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Personal</th>
-              <th>Cargo</th>
-              <th>Leyenda</th>
-              <th>Acción</th>
+              <th rowspan="2">DNI</th>
+              <th rowspan="2">Apellidos y Nombres</th>
+              <th rowspan="2">Cargo</th>
+              <th rowspan="2">Condicion Laboral</th>
+              <th rowspan="2">Jornada laboral</th>
+              <th>Inasistencia</th>
+              <th colspan="2">Tardanza</th>
+              <th colspan="2">Permisos SG</th>
+              <th>Huelga</th>
+            </tr>
+            <tr>
+              <th>Dias</th>
+              <th>Horas</th>
+              <th>Minutos</th>
+              <th>Horas</th>
+              <th>Minutos</th>
+              <th>Dias</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>id</td>
+              <td>dni</td>
               <td>personal</td>
               <td>cargo</td>
-              <td>
-                Marco/no marco
-              </td>
-              <td>
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Marcar</button>
-              </td>
+              <td>Condicion laboral</td>
+              <td>Jornada laboral</td>
+              <td>dias</td>
+              <td>horas</td>
+              <td>Minutos</td>
+              <td>horas</td>
+              <td>Minutos</td>
+              <td>Dias</td>
             </tr>
           </tbody>
         </table>
