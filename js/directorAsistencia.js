@@ -104,7 +104,15 @@ async function MarcarAsistencia(){
     //Aquí hago la resta
     t1.setHours(t1.getHours() - t2.getHours(), t1.getMinutes() - t2.getMinutes(), t1.getSeconds() - t2.getSeconds());
     //Imprimo el resultado
-    console.log(t1.getHours() + ":" + t1.getMinutes() + ":" + t1.getSeconds());
+    let horaTotal = 0;
+    let MinutosTotal = 0;
+    if (t1.getMinutes() ==0) {
+        horaTotal = 5 - t1.getHours();
+        MinutosTotal = t1.getMinutes();
+    }else{
+        horaTotal = (5 - t1.getHours())-1;
+        MinutosTotal = (59 - t1.getMinutes())+1;
+    }
     // console.log(dateasas.getTime());
     let stringcito = parseInt(dateasas.getTime())
     console.log(typeof(stringcito));
@@ -118,11 +126,12 @@ async function MarcarAsistencia(){
             fechaMarcaDeTiempo: stringcito,
             Hingreso: Hingreso,
             Hsalida: Hsalida,
-            Horas: t1.getHours(),
-            Minutos: t1.getMinutes(),
+            Horas: horaTotal,
+            Minutos: MinutosTotal,
             Leyenda: inputGroupSelect01
         }).then(() => {
             llenarTabla(fecha);
+            document.getElementById("marcar").setAttribute("disabled", "");
         }).catch(() => {
             alert("Error al marcar asistencia");
         });
@@ -137,6 +146,7 @@ async function MarcarAsistencia(){
             dia:1,
             Leyenda: inputGroupSelect01
         }).then(() => {
+            document.getElementById("marcar").setAttribute("disabled", "");
             llenarTabla(fecha);
         }).catch(() => {
             alert("Error al marcar asistencia");

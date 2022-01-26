@@ -23,7 +23,7 @@ async function TraerReporte( dt1, dt2){
     tabla.innerHTML = "";
     querySnapshot.forEach((doc) => {
         sumarHorasEinasistencias(doc.data().Dni, dt1, dt2, doc.data().Nombres,doc.data().Apellidos,doc.data().Cargo, doc.data().Condicion, doc.data().Jornada).then(async (data) => {
-           tabla.innerHTML += `
+          tabla.innerHTML += `
            <tr>
               <td>${data.dni}</td>
               <td>${data.nombre +" "+ data.apellido}</td>
@@ -38,6 +38,7 @@ async function TraerReporte( dt1, dt2){
               <td>${data.Huelga}</td>
             </tr>`;
         }).catch(async (error) => {
+          console.log(error);
           tabla.innerHTML += `
            <tr>
               <td>${error.dni}</td>
@@ -59,6 +60,7 @@ async function TraerReporte( dt1, dt2){
 
 async function sumarHorasEinasistencias(dni, d1, d2, nombre, apellido, cargo, condicion, jornada){
   return new Promise(async (resolve, reject) => {
+    // console.log(querySnapshot.size);
     let inasistencias = 0;
     let tardanzaHoras = 0;
     let tardanzaMinutos = 0;
@@ -67,7 +69,9 @@ async function sumarHorasEinasistencias(dni, d1, d2, nombre, apellido, cargo, co
     let Huelga = 0;
     const q = query(collection(db, "Asistencia"), where("Dni", "==", dni));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+
       querySnapshot.forEach((doc) => {
+        
         if (parseInt(doc.data().fechaMarcaDeTiempo) >= parseInt(d1) && parseInt(doc.data().fechaMarcaDeTiempo) <= parseInt(d2)) {
           if (doc.data().Leyenda == "P") {
               PermisoSGh += parseInt(doc.data().Horas);
@@ -76,19 +80,19 @@ async function sumarHorasEinasistencias(dni, d1, d2, nombre, apellido, cargo, co
               tardanzaHoras += parseInt(doc.data().Horas);
               tardanzaMinutos += parseInt(doc.data().Minutos);
           } if (doc.data().Leyenda == "I"){
-              inasistencias+=1;
+              inasistencias++;
           } if (doc.data().Leyenda == "H"){
-              Huelga+=1;
-              console.log();
+              Huelga++;
           }
-          resolve({ dni, nombre, apellido,cargo , inasistencias, condicion, jornada, tardanzaHoras, tardanzaMinutos, PermisoSGh, PermisoSGm, Huelga });
         }
       });
+      //console.log(dni,PermisoSGh, PermisoSGm, tardanzaHoras, tardanzaMinutos, inasistencias, Huelga);
+      resolve({ dni, nombre, apellido,cargo , inasistencias, condicion, jornada, tardanzaHoras, tardanzaMinutos, PermisoSGh, PermisoSGm, Huelga });
+
       reject({ dni, nombre, apellido, cargo, inasistencias, condicion, jornada, tardanzaHoras, tardanzaMinutos, PermisoSGh, PermisoSGm, Huelga });
     });
   })
 }
-
 function convert(str) {
     let mnths = {
         Jan: "01",

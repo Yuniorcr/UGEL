@@ -32,4 +32,5 @@ function marcarasistencia(dni,nombres,apellidos,cargo){
     document.getElementById("ApellidosM").value = apellidos;
     document.getElementById("CargoM").value = cargo;
     document.getElementById("fechas2").value = document.getElementById("fechas").value;
+    document.getElementById("marcar").removeAttribute("disabled");
 }
