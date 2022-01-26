@@ -25,3 +25,11 @@ function Asignar(id,Dni,Nombres,Apellidos,Cargo){
     document.getElementById("apellidoA").value = Apellidos;
     document.getElementById("cargoA").value = Cargo;
 }
+
+function marcarasistencia(dni,nombres,apellidos,cargo){
+    document.getElementById("dniM").value = dni;
+    document.getElementById("NonmbresM").value = nombres;
+    document.getElementById("ApellidosM").value = apellidos;
+    document.getElementById("CargoM").value = cargo;
+    document.getElementById("fechas2").value = document.getElementById("fechas").value;
+}

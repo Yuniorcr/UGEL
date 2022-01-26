@@ -20,3 +20,18 @@ window.addEventListener("DOMContentLoaded", async () => {
 })
 
 
+// const formulario = document.querySelector('#formulario');
+// const boton = document.querySelector('#boton');
+// const resultado = document.querySelector('#resultado')
+                  
+// const filtrar = ()=>{ 
+//  // console.Log(formulario.value);
+//   const texto = formulario.value.toLowerCase();
+//  for(let producto of productos){
+//     let nombre producto.nombre.toLowerCase(); 
+//     if(nombre.indexOf (texto) !== -1){
+//   }
+// }
+// boton.addEventListener('click', filtrar)
+
+//

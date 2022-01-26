@@ -35,10 +35,23 @@ const ReadAsignacion = async (cargo) => {
 window.addEventListener("DOMContentLoaded", async () => {
     var tab = document.getElementById("tab");
     var asignacion;
-    const q = query(collection(db, "Personal"));
+    var spinner = document.getElementById("Spinner");
+    spinner.innerHTML = `<div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+    </div>`
+    const q = query(collection(db, "Personal"), where("Cargo", "==", "Director"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        tab.innerHTML = ''
+        spinner.innerHTML = '';
+        tab.innerHTML = `<tr>
+        <th>DNI</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Cargo</th>
+        <th>Asignar</th>
+        <th>Status</th>
+      </tr>`
         querySnapshot.forEach((doc) => {
+            
             if (doc.data().Asignacion == undefined) {
                 asignacion = "No asignado"
             }else{
