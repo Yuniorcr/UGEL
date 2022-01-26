@@ -11,7 +11,7 @@ document.getElementById("fechas").addEventListener("change", fecha);
 document.getElementById("marcar").addEventListener("click", MarcarAsistencia);
 leyenda.addEventListener("change", () => {
     console.log(leyenda.value);
-    if (leyenda.value == "A" || leyenda.value == "P" || leyenda.value == "T") {
+    if (leyenda.value == "P" || leyenda.value == "T") {
         document.getElementById("Hingreso").removeAttribute("disabled");
         document.getElementById("Hsalida").removeAttribute("disabled");
         
@@ -94,39 +94,53 @@ async function MarcarAsistencia(){
     const inputGroupSelect01 = document.getElementById("inputGroupSelect01").value;
     let fechasa = fecha.split("-");
     let dateasas = new Date(fechasa[0], fechasa[1]-1, fechasa[2],0,0,0);
-    console.log(Hingreso.getTime());
+    console.log(Hingreso, Hsalida);
+    let hora1 = (Hsalida).split(":"),
+    hora2 = (Hingreso).split(":"),
+    t1 = new Date(),
+    t2 = new Date();
+    t1.setHours(hora1[0], hora1[1], 0);
+    t2.setHours(hora2[0], hora2[1], 0);
+    //Aquí hago la resta
+    t1.setHours(t1.getHours() - t2.getHours(), t1.getMinutes() - t2.getMinutes(), t1.getSeconds() - t2.getSeconds());
+    //Imprimo el resultado
+    console.log(t1.getHours() + ":" + t1.getMinutes() + ":" + t1.getSeconds());
     // console.log(dateasas.getTime());
-    // if (inputGroupSelect01 == "A" || inputGroupSelect01 == "P" || inputGroupSelect01 == "T") {
-    //     const docRef = await addDoc(collection(db, "Asistencia"), {
-    //         Dni: dni,
-    //         Nombres: nombres,
-    //         Apellidos: apellidos,
-    //         Cargo: cargo,
-    //         fecha: fecha,
-    //         fechaMarcaDeTiempo: dateasas,
-    //         Hingreso: Hingreso,
-    //         Hsalida: Hsalida,
-    //         Leyenda: inputGroupSelect01
-    //     }).then(() => {
-    //         llenarTabla(fecha);
-    //     }).catch(() => {
-    //         alert("Error al marcar asistencia");
-    //     });
-    // } else{
-    //     const docRef = await addDoc(collection(db, "Asistencia"), {
-    //         Dni: dni,
-    //         Nombres: nombres,
-    //         Apellidos: apellidos,
-    //         Cargo: cargo,
-    //         fecha: fecha,
-    //         fechaMarcaDeTiempo: dateasas,
-    //         dia :1,
-    //         Leyenda: inputGroupSelect01
-    //     }).then(() => {
-    //         llenarTabla(fecha);
-    //     }).catch(() => {
-    //         alert("Error al marcar asistencia");
-    //     });
-    // }
+    let stringcito = parseInt(dateasas.getTime())
+    console.log(typeof(stringcito));
+    if (inputGroupSelect01 == "P" || inputGroupSelect01 == "T") {
+        const docRef = await addDoc(collection(db, "Asistencia"), {
+            Dni: dni,
+            Nombres: nombres,
+            Apellidos: apellidos,
+            Cargo: cargo,
+            fecha: fecha,
+            fechaMarcaDeTiempo: stringcito,
+            Hingreso: Hingreso,
+            Hsalida: Hsalida,
+            Horas: t1.getHours(),
+            Minutos: t1.getMinutes(),
+            Leyenda: inputGroupSelect01
+        }).then(() => {
+            llenarTabla(fecha);
+        }).catch(() => {
+            alert("Error al marcar asistencia");
+        });
+    } else{
+        const docRef = await addDoc(collection(db, "Asistencia"), {
+            Dni: dni,
+            Nombres: nombres,
+            Apellidos: apellidos,
+            Cargo: cargo,
+            fecha: fecha,
+            fechaMarcaDeTiempo: stringcito,
+            dia:1,
+            Leyenda: inputGroupSelect01
+        }).then(() => {
+            llenarTabla(fecha);
+        }).catch(() => {
+            alert("Error al marcar asistencia");
+        });
+    }
 }
 
