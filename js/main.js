@@ -1,4 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { getFirestore, collection, onSnapshot, query,where} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+const db = getFirestore();
 const auth = getAuth();
 
 
@@ -9,7 +11,8 @@ document.getElementById("singIn").addEventListener("click",()=>{
     .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        location.href = "admin.html"
+        usuarios(email)
+        
     })
     .catch((error) => {
         const errorEnter = document.getElementById("error");
@@ -22,3 +25,17 @@ document.getElementById("singIn").addEventListener("click",()=>{
     });
 })
 
+
+async function usuarios(email){
+    const q = query(collection(db, "Personal"), where("usuario", "==", email));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+        if (doc.data().Cargo == "Director") {
+            location.href = "director-ini.html"
+        }
+        else {
+            location.href = "admin.html"
+        }
+        });
+    });
+}

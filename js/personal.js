@@ -7,6 +7,14 @@ const db = getFirestore();
 const DeletePereson = async (id) => {
   await deleteDoc(doc(db, "Personal",id));
 }
+// CerrarSession
+const CerrarSession = async () => {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
+}
 // habilitar usuarios
 const disabled = async () => {
   let cargito = document.getElementById("cargo").value;
@@ -18,6 +26,7 @@ const disabled = async () => {
     document.getElementById("contraseña22").setAttribute("disabled", "");
   }
 }
+document.getElementById("CerrarSession").addEventListener("click", CerrarSession);
 document.getElementById("cargo").addEventListener("change", disabled);
 document.getElementById("save").addEventListener("click", AddPerson);
 document.getElementById("update").addEventListener("click", updatePerson);

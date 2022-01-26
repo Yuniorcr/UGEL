@@ -22,41 +22,71 @@ async function TraerReporte( dt1, dt2){
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     tabla.innerHTML = "";
     querySnapshot.forEach((doc) => {
-        sumarHorasEinasistencias(doc.data().Dni, dt1, dt2).then(async (data) => {
-          console.log(data);
-        });
+        sumarHorasEinasistencias(doc.data().Dni, dt1, dt2, doc.data().Nombres,doc.data().Apellidos,doc.data().Cargo, doc.data().Condicion, doc.data().Jornada).then(async (data) => {
+           tabla.innerHTML += `
+           <tr>
+              <td>${data.dni}</td>
+              <td>${data.nombre +" "+ data.apellido}</td>
+              <td>${data.cargo}</td>
+              <td>${data.condicion}</td>
+              <td>${data.jornada}</td>
+              <td>${data.inasistencias}</td>
+              <td>${data.tardanzaHoras}</td>
+              <td>${data.tardanzaMinutos}</td>
+              <td>${data.PermisoSGh}</td>
+              <td>${data.PermisoSGm}</td>
+              <td>${data.Huelga}</td>
+            </tr>`;
+        }).catch(async (error) => {
+          tabla.innerHTML += `
+           <tr>
+              <td>${error.dni}</td>
+              <td>${error.nombre +" "+ error.apellido}</td>
+              <td>${error.cargo}</td>
+              <td>${error.condicion}</td>
+              <td>${error.jornada}</td>
+              <td>${error.inasistencias}</td>
+              <td>${error.tardanzaHoras}</td>
+              <td>${error.tardanzaMinutos}</td>
+              <td>${error.PermisoSGh}</td>
+              <td>${error.PermisoSGm}</td>
+              <td>${error.Huelga}</td>
+            </tr>`;
+        })
     });
   });
 }
 
-async function sumarHorasEinasistencias(dni, d1, d2){
-  let inasistencias = 0;
-  let tardanzaHoras = 0;
-  let tardanzaMinutos = 0;
-  let PermisoSGh = 0;
-  let PermisoSGm = 0;
-  let Huelga = 0;
-  const q = query(collection(db, "Asistencia"), where("Dni", "==", dni));
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      if (parseInt(doc.data().fechaMarcaDeTiempo) >= parseInt(d1) || parseInt(doc.data().fechaMarcaDeTiempo) <= parseInt(d2)) {
-          console.log(doc.data());
-        if (doc.data().Leyenda == "P") {
-            PermisoSGh += parseInt(doc.data().Horas);
-            PermisoSGm += parseInt(doc.data().Minutos);
-        } if (doc.data().Leyenda == "T") {
-            tardanzaHoras += parseInt(doc.data().Horas);
-            tardanzaMinutos += parseInt(doc.data().Minutos);
-        } if (doc.data().Leyenda == "I"){
-            inasistencias+=1;
-        } if (doc.data().Leyenda == "H"){
-            Huelga+=1;
+async function sumarHorasEinasistencias(dni, d1, d2, nombre, apellido, cargo, condicion, jornada){
+  return new Promise(async (resolve, reject) => {
+    let inasistencias = 0;
+    let tardanzaHoras = 0;
+    let tardanzaMinutos = 0;
+    let PermisoSGh = 0;
+    let PermisoSGm = 0;
+    let Huelga = 0;
+    const q = query(collection(db, "Asistencia"), where("Dni", "==", dni));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (parseInt(doc.data().fechaMarcaDeTiempo) >= parseInt(d1) && parseInt(doc.data().fechaMarcaDeTiempo) <= parseInt(d2)) {
+          if (doc.data().Leyenda == "P") {
+              PermisoSGh += parseInt(doc.data().Horas);
+              PermisoSGm += parseInt(doc.data().Minutos);
+          } if (doc.data().Leyenda == "T") {
+              tardanzaHoras += parseInt(doc.data().Horas);
+              tardanzaMinutos += parseInt(doc.data().Minutos);
+          } if (doc.data().Leyenda == "I"){
+              inasistencias+=1;
+          } if (doc.data().Leyenda == "H"){
+              Huelga+=1;
+              console.log();
+          }
+          resolve({ dni, nombre, apellido,cargo , inasistencias, condicion, jornada, tardanzaHoras, tardanzaMinutos, PermisoSGh, PermisoSGm, Huelga });
         }
-      }
+      });
+      reject({ dni, nombre, apellido, cargo, inasistencias, condicion, jornada, tardanzaHoras, tardanzaMinutos, PermisoSGh, PermisoSGm, Huelga });
     });
-  });
-  console.log(dni + " " + inasistencias + " " + tardanzaHoras + " " + tardanzaMinutos + " " + PermisoSGh + " " + PermisoSGm + " " + Huelga);
-  return { dni, inasistencias, tardanzaHoras, tardanzaMinutos, PermisoSGh, PermisoSGm, Huelga };
+  })
 }
 
 function convert(str) {
