@@ -11,8 +11,7 @@ document.getElementById("singIn").addEventListener("click",()=>{
     .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        usuarios(email)
-        
+        usuarios(user.email)
     })
     .catch((error) => {
         const errorEnter = document.getElementById("error");
@@ -25,11 +24,11 @@ document.getElementById("singIn").addEventListener("click",()=>{
     });
 })
 
-
 async function usuarios(email){
-    const q = query(collection(db, "Personal"), where("usuario", "==", email));
+    const q = query(collection(db, "Personal"), where("usuario", "==", email.toUpperCase()));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
+            console.log(doc.data());
         if (doc.data().Cargo == "Director") {
             location.href = "director-ini.html"
         }
