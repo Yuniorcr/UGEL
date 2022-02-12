@@ -1,4 +1,6 @@
 import { getFirestore, collection, addDoc, onSnapshot, query, doc, deleteDoc, updateDoc,where} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+const auth = getAuth();
 const db = getFirestore();
 
 const mes = document.getElementById("mes");
@@ -12,13 +14,23 @@ mes.addEventListener("change", async () => {
 })
 
 window.addEventListener("DOMContentLoaded", async () => {
-  TraerReporte(1641013200000,1643605200000); 
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const q = query(collection(db, "Personal"), where("usuario", "==", (user.email).toUpperCase()));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                TraerReporte(1641013200000,1643605200000, doc.data().InstitucionE); 
+            })
+        })
+    } 
+    });
+  
 })
 
 
-async function TraerReporte( dt1, dt2){
+async function TraerReporte( dt1, dt2, i){
   let tabla = document.getElementById("reporte");
-  const q = query(collection(db, "Personal"))
+  const q = query(collection(db, "Personal"), where("InstitucionE", "==", i));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     tabla.innerHTML = "";
     querySnapshot.forEach((doc) => {

@@ -6,11 +6,22 @@ const db = getFirestore();
 
 const fecha = async () => {
     let actFecha = document.getElementById("fechas").value;
-    await llenarTabla(actFecha);
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const q = query(collection(db, "Personal"), where("usuario", "==", (user.email).toUpperCase()));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                     llenarTabla(actFecha, doc.data().InstitucionE);
+                })
+            })
+        } 
+    });
+
 }
 const leyenda = document.getElementById("inputGroupSelect01");
 document.getElementById("fechas").addEventListener("change", fecha);
 document.getElementById("marcar").addEventListener("click", MarcarAsistencia);
+document.getElementById("marcartodo").addEventListener("click", authChange);
 leyenda.addEventListener("change", () => {
     console.log(leyenda.value);
     if (leyenda.value == "P" || leyenda.value == "T") {
@@ -35,7 +46,6 @@ window.addEventListener("DOMContentLoaded", async () => {
                 llenarTabla(fechaValorP, doc.data().InstitucionE);
             })
         })
-
     } 
     });
 })
@@ -108,7 +118,6 @@ async function MarcarAsistencia(){
     const inputGroupSelect01 = document.getElementById("inputGroupSelect01").value;
     let fechasa = fecha.split("-");
     let dateasas = new Date(fechasa[0], fechasa[1]-1, fechasa[2],0,0,0);
-    console.log(Hingreso, Hsalida);
     let hora1 = (Hsalida).split(":"),
     hora2 = (Hingreso).split(":"),
     t1 = new Date(),
@@ -168,3 +177,46 @@ async function MarcarAsistencia(){
     }
 }
 
+
+async function authChange() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const q = query(collection(db, "Personal"), where("usuario", "==", (user.email).toUpperCase()));
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    MarcarTodos(doc.data().InstitucionE);
+                })
+            })
+        } 
+    });
+}
+
+async function MarcarTodos(f){
+    const fecha = document.getElementById("fechas").value;
+    const leyenda = document.getElementById("dadad").value;
+    let fechasa = fecha.split("-");
+    let dateasas = new Date(fechasa[0], fechasa[1]-1, fechasa[2],0,0,0);
+    let stringcito = parseInt(dateasas.getTime())
+    console.log(stringcito);
+    const q = query(collection(db, "Personal"), where("InstitucionE", "==", f));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const docRef = addDoc(collection(db, "Asistencia"), {
+                Dni: doc.data().Dni,
+                Nombres: doc.data().Nombres,
+                Apellidos: doc.data().Apellidos,
+                Cargo: doc.data().Cargo,
+                fecha: fecha,
+                fechaMarcaDeTiempo: stringcito,
+                dia:1,
+                Leyenda: leyenda
+            }).then(() => {
+                alert("Asistencia marcada");
+                llenarTabla(fecha, f);
+            }).catch(() => {
+                alert("Error al marcar asistencia");
+            });
+        })
+    })
+
+}
