@@ -1,4 +1,6 @@
 import { getFirestore, collection, addDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+const auth = getAuth();
 const db = getFirestore();
 
 
@@ -24,7 +26,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     var  date = new Date();
     document.getElementById("fechas").value = date.getFullYear() + '-' + date.getMonth() +1+ '-' + date.getDate();
     var fechaValorP = document.getElementById("fechas").value;
-    llenarTabla(fechaValorP)
+
+    onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const q = query(collection(db, "Personal"), where("usuario", "==", (user.email).toUpperCase()));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                llenarTabla(fechaValorP, doc.data().InstitucionE);
+            })
+        })
+
+    } 
+    });
 })
 
 function VerificarMarcadoAsistencia(dni, fecha){
@@ -40,9 +53,10 @@ function VerificarMarcadoAsistencia(dni, fecha){
         })
     })
 }
-async function llenarTabla(f){
+
+async function llenarTabla(f, i) {
     let tb = document.getElementById("marcarasistencia");
-    const q = query(collection(db, "Personal"));
+    const q = query(collection(db, "Personal"), where("InstitucionE", "==", i));
     const unsubscribe = onSnapshot(q, async (querySnapshot) => {
     tb.innerHTML = '';
     querySnapshot.forEach((doc) => {

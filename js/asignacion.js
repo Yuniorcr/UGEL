@@ -33,6 +33,7 @@ const ReadAsignacion = async (cargo) => {
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
+    SelectInstitution();
     var tab = document.getElementById("tab");
     var asignacion;
     var spinner = document.getElementById("Spinner");
@@ -115,5 +116,19 @@ async function Asignar(){
       Update failed ! :(
   </div>
       `
+    });
+}
+
+async function SelectInstitution(){
+    
+    const q = query(collection(db, "Institucion"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    document.getElementById("institucionA").innerHTML = '';
+    querySnapshot.forEach((doc) => {
+        document.getElementById("institucionA").innerHTML += 
+        `
+        <option value="${doc.data().Nombre}">${doc.data().Nombre}</option>
+        `
+    });
     });
 }
